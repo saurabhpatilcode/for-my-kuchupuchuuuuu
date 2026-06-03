@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>For My Kuchupuchuuuuu 💖</title>
+    <!-- Linking Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- DECRYPTION LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loading-heart" style="transform-origin: center;">
+            <svg width="80" height="80" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+        </div>
+        <div class="loading-text">Unlocking our magical moments...</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Canvas for falling rose petals -->
+    <div id="petal-canvas"></div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Audio Widget -->
+    <div id="music-widget" class="muted">
+        <div class="equalizer-bars">
+            <div class="eq-bar eq-bar-1"></div>
+            <div class="eq-bar eq-bar-2"></div>
+            <div class="eq-bar eq-bar-3"></div>
+            <div class="eq-bar eq-bar-4"></div>
+        </div>
+        <span class="music-label">Our Song</span>
+    </div>
+
+    <!-- LOGIN SCREEN (OTP VERIFICATION) -->
+    <div id="login-screen">
+        <div class="login-card glass-panel">
+            <div class="mb-6 heart-beat">
+                <svg width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+            </div>
+            
+            <h1 class="login-title">For You, My Love</h1>
+            <p class="login-subtitle">Romantic OTP Verification</p>
+
+            <div class="otp-container">
+                <!-- Word 1: A -->
+                <div class="otp-row">
+                    <div class="otp-prefix">A</div>
+                    <input type="text" id="otp-1" class="otp-input" placeholder="•••••••" autocomplete="off" spellcheck="false">
+                </div>
+                <!-- Word 2: N -->
+                <div class="otp-row">
+                    <div class="otp-prefix">N</div>
+                    <input type="text" id="otp-2" class="otp-input" placeholder="•••••••" autocomplete="off" spellcheck="false">
+                </div>
+                <!-- Word 3: U -->
+                <div class="otp-row">
+                    <div class="otp-prefix">U</div>
+                    <input type="text" id="otp-3" class="otp-input" placeholder="••••" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+
+            <button id="login-btn" class="login-btn">Unlock My Heart 💖</button>
+            <div id="error-msg" class="error-msg">Incorrect verification words. Think sweetheart! 💕</div>
+        </div>
+    </div>
+
+    <!-- BIRTHDAY CAKE SCREEN -->
+    <div id="cake-screen">
+        <div class="cake-card glass-panel">
+            <h1 class="cake-title">Happy Birthday! 🎂</h1>
+            <p class="cake-instructions" style="text-align: center;">
+                Make a wish, <strong>Kuchupuchuuuuu</strong>! ✨<br>
+                <span id="mic-status" style="font-size: 0.9rem; color: var(--rose-deep); font-weight: 500; display: inline-block; margin-top: 5px;">
+                    🎙️ Blow into your microphone, or tap the candles to blow them out!
+                </span>
+            </p>
+
+            <div class="cake-wrapper">
+                <div class="cake-plate"></div>
+                <div class="cake-body">
+                    <div class="cake-frosting"></div>
+                    <div class="drips">
+                        <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+                        <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+                        <div class="drip"></div><div class="drip"></div>
+                    </div>
+                    <div class="cake-cream"></div>
+                </div>
+
+                <div class="candles-container">
+                    <div class="candle">
+                        <div class="wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="wick"></div>
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="open-card-btn" class="login-btn" style="display: none; max-width: 250px; margin: 1rem auto 0;">Open My Birthday Card 💖</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER (Hidden initially) -->
+    <div id="main-app" style="display: none; opacity: 0; transition: opacity 1.5s ease-in-out;">
+        
+        <!-- Header / Navigation -->
+        <header id="app-header">
+            <a href="#" class="brand">For Kuchupuchuuuuu</a>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-view="slideshow">Our Moments</button>
+                <button class="tab-btn" data-view="poem">Our Poem</button>
+            </nav>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <main id="app-content">
+
+            <!-- PAGE 1: POEM VIEW -->
+            <section id="poem-view" class="app-view">
+                <div class="poem-hero">
+                    <h2 class="poem-greeting">Hey Kuchupuchuuuuu,</h2>
+                    <p class="poem-subtitle">
+                        This isn't a poem written by me, but by a friend last year.<br>
+                        At that time, I didn't know who it connected with...<br>
+                        But today, I see the resemblance of it with you.<br>
+                        For that, I dedicate this to you.
+                    </p>
+                </div>
+
+                <div class="poem-card glass-panel">
+                    <div class="poem-stanzas" id="poem-stanzas-container">
+                        <!-- Decrypted stanzas injected here -->
+                    </div>
+                </div>
+
+                <!-- Reasons / Compliments Tag Cloud -->
+                <div class="reasons-section">
+                    <h3 class="reasons-title">The little things about you...</h3>
+                    <div class="reasons-cloud" id="reasons-cloud">
+                        <span class="reason-tag">Your infectious laugh</span>
+                        <span class="reason-tag">The way you listen to me</span>
+                        <span class="reason-tag">The sparkle in your eyes</span>
+                        <span class="reason-tag">How incredibly warm you feel</span>
+                        <span class="reason-tag">Your beautiful, infinite dreams</span>
+                        <span class="reason-tag">Your boundless kindness</span>
+                        <span class="reason-tag">The peace you bring into my life</span>
+                        <span class="reason-tag">Simply... everything about you</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: SLIDESHOW VIEW -->
+            <section id="slideshow-view" class="app-view active">
+                <div class="slideshow-hero">
+                    <h2 class="slideshow-title">Our Beautiful Moments</h2>
+                    <p class="slideshow-subtitle">A collection of memories, smiles, and laughter we share.</p>
+                </div>
+
+                <div class="slideshow-wrapper">
+                    <!-- Images Container -->
+                    <div class="slides-container" id="slides-container">
+                        <!-- Slides will be injected dynamically by JavaScript -->
+                    </div>
+                    <!-- Slide Navigation Controls -->
+                    <button class="slide-ctrl slide-ctrl-prev" id="prev-btn" aria-label="Previous Slide">❮</button>
+                    <button class="slide-ctrl slide-ctrl-next" id="next-btn" aria-label="Next Slide">❯</button>
+
+                    <!-- Bottom indicators bar -->
+                    <div class="slideshow-bar">
+                        <div class="slideshow-dots" id="slideshow-dots">
+                            <!-- Dots injected dynamically -->
+                        </div>
+                        <button class="play-pause-btn" id="play-pause-btn">
+                            <span id="play-pause-icon">⏸</span> <span id="play-pause-text">Pause Autoplay</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer">
+            From my heart to yours • Forever & Always 💖
+        </footer>
+    </div>
+
+    <script>
+        // --- 1. CONFIGURATION & STATE ---
+        const nickname = "Kuchupuchuuuuu";
+        
+        // Encrypted Poem Base64 String (Derived using SHA-256 password key 'awesomenaturalufff')
+        const encryptedPoemBase64 = "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";
+
+        // Correct answers for the login OTP
+        const correctAnswers = {
+            1: ["awesome", "wesome"],
+            2: ["natural", "atural"],
+            3: ["ufff", "fff"]
+        };
+
+        // --- WEB CRYPTO API DECRYPTION HELPERS ---
+        async function getDecryptionKey(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return await crypto.subtle.importKey(
+                'raw',
+                hash,
+                { name: 'AES-GCM' },
+                false,
+                ['decrypt']
+            );
+        }
+
+        async function decryptText(base64Ciphertext, key) {
+            const binaryString = window.atob(base64Ciphertext);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            
+            const iv = bytes.slice(0, 12);
+            const data = bytes.slice(12);
+            
+            const decrypted = await crypto.subtle.decrypt(
+                { name: 'AES-GCM', iv: iv },
+                key,
+                data
+            );
+            
+            return new TextDecoder().decode(decrypted);
+        }
+
+        async function decryptFile(url, key) {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch file: ${url}`);
+            }
+            const combinedBuffer = await response.arrayBuffer();
+            
+            const iv = combinedBuffer.slice(0, 12);
+            const data = combinedBuffer.slice(12);
+            
+            const decrypted = await crypto.subtle.decrypt(
+                { name: 'AES-GCM', iv: new Uint8Array(iv) },
+                key,
+                data
+            );
+            
+            return decrypted;
+        }
+
+        // IMAGE PLAYLIST (Curated High Quality Unsplash Placeholders)
+        // TIP: To use your own photos, put them in a folder called 'images/' in this folder,
+        // and replace the URLs below with relative paths like 'images/photo1.jpg'
+        const slideshowImages = [
+            {
+                url: "images/pic1.jpeg",
+                caption: "Just us 💖"
+            },
+            {
+                url: "images/pic2.jpeg",
+                caption: "My absolute favorite person in the world"
+            },
+            {
+                url: "images/pic3.jpeg",
+                caption: "Every day is better with you by my side"
+            },
+            {
+                url: "images/pic4.jpeg",
+                caption: "Making memories, one walk at a time 🚶‍♂️🚶‍♀️"
+            },
+            {
+                url: "images/pic5.jpeg",
+                caption: "That smile is my favorite view"
+            },
+            {
+                url: "images/pic6.jpeg",
+                caption: "Laughs, inside jokes, and silly moments"
+            },
+            {
+                url: "images/pic7.jpeg",
+                caption: "The best chats over whiskey and beers 🥃🍻"
+            },
+            {
+                url: "images/pic8.jpeg",
+                caption: "So incredibly lucky to have you"
+            },
+            {
+                url: "images/pic9.jpeg",
+                caption: "Just a happy moment together"
+            },
+            {
+                url: "images/pic10.jpeg",
+                caption: "Happy Birthday, Kuchupuchuuuuu! Here's to many more silly photos together! 💖"
+            }
+        ];
+
+        // --- DOM Elements ---
+        const loginScreen = document.getElementById('login-screen');
+        const mainApp = document.getElementById('main-app');
+        const loginBtn = document.getElementById('login-btn');
+        const errorMsg = document.getElementById('error-msg');
+        
+        const bgMusic = document.getElementById('bg-music');
+        const musicWidget = document.getElementById('music-widget');
+        
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const appViews = document.querySelectorAll('.app-view');
+        
+        const slidesContainer = document.getElementById('slides-container');
+        const slidesDotsContainer = document.getElementById('slideshow-dots');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playPauseIcon = document.getElementById('play-pause-icon');
+        const playPauseText = document.getElementById('play-pause-text');
+
+        // Slideshow State
+        let currentSlideIndex = 0;
+        let slideshowInterval = null;
+        let isAutoplayActive = true;
+
+        // --- 2. LOGIN LOGIC ---
+        loginBtn.addEventListener('click', verifyLogin);
+        // Press Enter on password inputs to submit
+        document.querySelectorAll('.otp-input').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') verifyLogin();
+            });
+        });
+
+        function verifyLogin() {
+            const val1 = document.getElementById('otp-1').value.trim().toLowerCase();
+            const val2 = document.getElementById('otp-2').value.trim().toLowerCase();
+            const val3 = document.getElementById('otp-3').value.trim().toLowerCase();
+
+            const isOk1 = correctAnswers[1].includes(val1);
+            const isOk2 = correctAnswers[2].includes(val2);
+            const isOk3 = correctAnswers[3].includes(val3);
+
+            if (isOk1 && isOk2 && isOk3) {
+                // Correct credentials
+                unlockWebsite();
+            } else {
+                // Shake and show error
+                errorMsg.classList.add('visible');
+                const card = document.querySelector('.login-card');
+                card.style.animation = 'none';
+                void card.offsetWidth; // trigger reflow
+                card.style.animation = 'shake 0.5s ease-in-out';
+                
+                // Log fail for debugging if needed
+                console.log("Login failed with input:", {val1, val2, val3});
+            }
+        }
+
+        // Add shake keyframe styling dynamically
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20%, 60% { transform: translateX(-8px); }
+                40%, 80% { transform: translateX(8px); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        const cakeScreen = document.getElementById('cake-screen');
+        const openCardBtn = document.getElementById('open-card-btn');
+
+        async function unlockWebsite() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('loading-progress');
+            const loadingText = document.querySelector('.loading-text');
+
+            // 1. Unhide loading screen
+            loadingScreen.style.display = 'flex';
+            loadingScreen.style.opacity = '1';
+
+            // Use the standardized passphrase awesomenaturalufff
+            const passphrase = 'awesomenaturalufff';
+
+            try {
+                const key = await getDecryptionKey(passphrase);
+                
+                // 2. Decrypt Poem
+                loadingText.textContent = "Unlocking the poem...";
+                progressBar.style.width = "10%";
+                const poemHtml = await decryptText(encryptedPoemBase64, key);
+                document.getElementById('poem-stanzas-container').innerHTML = poemHtml;
+
+                // 3. Decrypt Music
+                loadingText.textContent = "Loading our song...";
+                progressBar.style.width = "30%";
+                const musicBuffer = await decryptFile("music.mp3.enc", key);
+                const musicBlob = new Blob([musicBuffer], { type: "audio/mpeg" });
+                const musicUrl = URL.createObjectURL(musicBlob);
+                
+                // Update audio source
+                bgMusic.innerHTML = `<source src="${musicUrl}" type="audio/mpeg">`;
+                bgMusic.load();
+                
+                // Unmute & Play background music
+                bgMusic.volume = 0.45;
+                bgMusic.play().then(() => {
+                    musicWidget.classList.add('playing');
+                    musicWidget.classList.remove('muted');
+                }).catch(e => {
+                    console.log("Music play blocked initially, will unlock on next interaction:", e);
+                });
+
+                // 4. Decrypt Photos
+                const totalPhotos = slideshowImages.length;
+                for (let i = 0; i < totalPhotos; i++) {
+                    const photoNum = i + 1;
+                    loadingText.textContent = `Preparing moment ${photoNum}/${totalPhotos}...`;
+                    
+                    const progressVal = 30 + Math.round((i / totalPhotos) * 65);
+                    progressBar.style.width = `${progressVal}%`;
+                    
+                    const photoBuffer = await decryptFile(`images/pic${photoNum}.jpeg.enc`, key);
+                    const photoBlob = new Blob([photoBuffer], { type: "image/jpeg" });
+                    const photoUrl = URL.createObjectURL(photoBlob);
+                    
+                    // Update image source in slideshow array
+                    slideshowImages[i].url = photoUrl;
+                }
+
+                progressBar.style.width = "100%";
+                loadingText.textContent = "All moments unlocked! 💖";
+                
+                // Transition login screen to cake screen
+                setTimeout(() => {
+                    loginScreen.style.display = 'none';
+                    loadingScreen.style.opacity = '0';
+                    cakeScreen.style.display = 'flex';
+                    void cakeScreen.offsetWidth;
+                    cakeScreen.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 800);
+                    
+                    initCakeScreen();
+                }, 1000);
+
+            } catch (err) {
+                console.error("Asset decryption failed:", err);
+                loadingText.textContent = "Unlocking failed. Please check files.";
+                alert("Verification asset decryption error! Make sure encryption files match.");
+            }
+        }
+
+        // --- BIRTHDAY CAKE LOGIC ---
+        let candlesBlown = false;
+        let audioContext, analyser, microphone, javascriptNode;
+
+        function initCakeScreen() {
+            // Set up tap/click listeners on candles
+            document.querySelectorAll('.candle').forEach(candle => {
+                candle.addEventListener('click', blowOutCandles);
+                candle.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    blowOutCandles();
+                }, { passive: false });
+            });
+
+            // Set up mic detection
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                    .then(function(stream) {
+                        document.getElementById('mic-status').innerHTML = "🎙️ Blow into your microphone to blow out the candles!";
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        analyser = audioContext.createAnalyser();
+                        microphone = audioContext.createMediaStreamSource(stream);
+                        javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+                        analyser.smoothingTimeConstant = 0.3;
+                        analyser.fftSize = 1024;
+
+                        microphone.connect(analyser);
+                        analyser.connect(javascriptNode);
+                        javascriptNode.connect(audioContext.destination);
+
+                        javascriptNode.onaudioprocess = function() {
+                            const array = new Uint8Array(analyser.frequencyBinCount);
+                            analyser.getByteFrequencyData(array);
+                            let values = 0;
+
+                            const length = array.length;
+                            for (let i = 0; i < length; i++) {
+                                values += array[i];
+                            }
+
+                            const average = values / length;
+                            // Threshold: values over 65 represent blow or loud noise
+                            if (average > 65) {
+                                blowOutCandles();
+                                // Clean up audio stream
+                                stream.getTracks().forEach(track => track.stop());
+                                if (audioContext.state !== 'closed') {
+                                    audioContext.close();
+                                }
+                            }
+                        };
+                    })
+                    .catch(function(err) {
+                        console.warn("Microphone access denied or unavailable. Falling back to tap candles.", err);
+                        document.getElementById('mic-status').innerHTML = "🕯️ Tap the candles to blow them out!";
+                    });
+            } else {
+                document.getElementById('mic-status').innerHTML = "🕯️ Tap the candles to blow them out!";
+            }
+
+            // Hook "Open Birthday Card" click
+            openCardBtn.addEventListener('click', () => {
+                cakeScreen.style.opacity = '0';
+                setTimeout(() => {
+                    cakeScreen.style.display = 'none';
+                    mainApp.style.display = 'block';
+                    void mainApp.offsetWidth;
+                    mainApp.style.opacity = '1';
+                    
+                    // Initialize main page features
+                    initPetalEngine();
+                    initPoemScrollObserver();
+                    initSlideshow();
+                }, 1000);
+            });
+        }
+
+        function blowOutCandles() {
+            if (candlesBlown) return;
+            candlesBlown = true;
+
+            // Extinguish all candle flames
+            document.querySelectorAll('.flame').forEach(flame => {
+                flame.classList.add('blown-out');
+            });
+            document.querySelectorAll('.smoke').forEach(smoke => {
+                smoke.classList.add('active');
+            });
+
+            document.getElementById('mic-status').innerHTML = "🎉 Your wish has been sent to the universe! ✨";
+
+            // Trigger colorful confetti
+            triggerConfettiParty();
+
+            // Display reveal button
+            openCardBtn.style.display = 'block';
+        }
+
+        function triggerConfettiParty() {
+            const colors = ['#ff758f', '#ffccd5', '#fd79a8', '#ffeaa7', '#81ecec', '#fab1a0', '#74b9ff'];
+            const count = window.innerWidth > 768 ? 120 : 60;
+
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -20 - (Math.random() * 100) + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 6 + 'px';
+                confetti.style.height = Math.random() * 12 + 6 + 'px';
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                
+                confetti.style.animationDuration = Math.random() * 2 + 2.5 + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4500);
+            }
+        }
+
+        // --- 3. AUDIO PLAYER CONTROL ---
+        musicWidget.addEventListener('click', toggleMusic);
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicWidget.classList.add('playing');
+                musicWidget.classList.remove('muted');
+            } else {
+                bgMusic.pause();
+                musicWidget.classList.remove('playing');
+                musicWidget.classList.add('muted');
+            }
+        }
+
+        // --- 4. VIEW TABS NAVIGATION ---
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetView = btn.getAttribute('data-view');
+                
+                // Toggle nav tabs active state
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Toggle views active state
+                appViews.forEach(view => {
+                    if (view.id === `${targetView}-view`) {
+                        view.classList.add('active');
+                        // Trigger scrolling fade-in refresh
+                        if (targetView === 'poem') {
+                            initPoemScrollObserver();
+                        }
+                    } else {
+                        view.classList.remove('active');
+                    }
+                });
+
+                // Scroll to top of content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // --- 5. POEM EFFECTS & INTERSECTION OBSERVER ---
+        function initPoemScrollObserver() {
+            const stanzas = document.querySelectorAll('.poem-stanza');
+            const tags = document.querySelectorAll('.reason-tag');
+            
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries, self) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        self.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            stanzas.forEach(el => observer.observe(el));
+            tags.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 100}ms`;
+                observer.observe(el);
+            });
+        }
+
+        // Poem Burst Emitter using event delegation (since #burst-trigger is dynamically injected after decryption)
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'burst-trigger') {
+                spawnHeartBurst(e);
+            }
+        });
+        document.addEventListener('touchstart', (e) => {
+            if (e.target && e.target.id === 'burst-trigger') {
+                spawnHeartBurst(e);
+            }
+        });
+
+        function spawnHeartBurst(e) {
+            if (e && e.cancelable) {
+                e.preventDefault();
+            }
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth / 2;
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight / 2;
+
+            const particles = ['🌸', '🤍', '✨', '💖', '🌹', '💕', '🧸', '🍭'];
+            const count = window.innerWidth > 768 ? 40 : 25;
+
+            for (let i = 0; i < count; i++) {
+                const span = document.createElement('span');
+                span.className = 'burst-particle';
+                span.innerHTML = particles[Math.floor(Math.random() * particles.length)];
+
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 100 + Math.random() * 200;
+                const tx = Math.cos(angle) * speed;
+                const ty = Math.sin(angle) * speed;
+                const tr = Math.random() * 360;
+
+                span.style.left = `${clientX}px`;
+                span.style.top = `${clientY}px`;
+                span.style.setProperty('--tx', `${tx}px`);
+                span.style.setProperty('--ty', `${ty}px`);
+                span.style.setProperty('--tr', `${tr}deg`);
+
+                document.body.appendChild(span);
+                setTimeout(() => span.remove(), 1200);
+            }
+        }
+
+        // --- 6. FALLING PETALS ENGINE ---
+        let petalTimer = null;
+        function initPetalEngine() {
+            if (petalTimer) return;
+            petalTimer = setInterval(createSinglePetal, 1000);
+        }
+
+        function createSinglePetal() {
+            const canvas = document.getElementById('petal-canvas');
+            const maxPetals = window.innerWidth > 768 ? 40 : 20;
+
+            if (canvas.children.length >= maxPetals) return;
+
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+
+            const size = window.innerWidth > 768 ? Math.random() * 15 + 12 : Math.random() * 8 + 8;
+            const startX = Math.random() * 100;
+            const duration = Math.random() * 6 + 7;
+
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${startX}vw`;
+            petal.style.animationDuration = `${duration}s`;
+
+            // Mix matching soft pink/cream colours
+            const colors = ['#ffb7c5', '#ffccd5', '#ffccd5', '#fff0f3', '#ffe5ec'];
+            petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            canvas.appendChild(petal);
+            setTimeout(() => petal.remove(), duration * 1000);
+        }
+
+        // --- 7. SLIDESHOW / CAROUSEL MODULE ---
+        function initSlideshow() {
+            slidesContainer.innerHTML = "";
+            slidesDotsContainer.innerHTML = "";
+
+            // Create Slides & Dots
+            slideshowImages.forEach((imgData, i) => {
+                // Slide Element
+                const slide = document.createElement('div');
+                slide.className = `slide ${i === 0 ? 'active' : ''}`;
+                
+                const img = document.createElement('img');
+                img.src = imgData.url;
+                img.alt = `Slide ${i + 1}`;
+                
+                const caption = document.createElement('div');
+                caption.className = 'slide-caption';
+                caption.textContent = imgData.caption;
+
+                slide.appendChild(img);
+                slide.appendChild(caption);
+                slidesContainer.appendChild(slide);
+
+                // Dot Element
+                const dot = document.createElement('div');
+                dot.className = `slide-dot ${i === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetAutoplay();
+                });
+                slidesDotsContainer.appendChild(dot);
+            });
+
+            // Start Auto slide timer
+            startAutoplay();
+
+            // Hook arrow keys click events
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoplay();
+            });
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoplay();
+            });
+
+            // Play Pause control button
+            playPauseBtn.addEventListener('click', () => {
+                if (isAutoplayActive) {
+                    stopAutoplay();
+                    isAutoplayActive = false;
+                    playPauseIcon.textContent = "▶";
+                    playPauseText.textContent = "Resume Autoplay";
+                } else {
+                    startAutoplay();
+                    isAutoplayActive = true;
+                    playPauseIcon.textContent = "⏸";
+                    playPauseText.textContent = "Pause Autoplay";
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            
+            if (slides.length === 0) return;
+
+            // Remove active classes with safety check
+            if (slides[currentSlideIndex]) slides[currentSlideIndex].classList.remove('active');
+            if (dots[currentSlideIndex]) dots[currentSlideIndex].classList.remove('active');
+
+            currentSlideIndex = (index + slides.length) % slides.length;
+
+            // Add active classes with safety check
+            if (slides[currentSlideIndex]) slides[currentSlideIndex].classList.add('active');
+            if (dots[currentSlideIndex]) dots[currentSlideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlideIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlideIndex - 1);
+        }
+
+        function startAutoplay() {
+            stopAutoplay(); // Clear previous just in case
+            slideshowInterval = setInterval(nextSlide, 5000); // 5 seconds duration per slide
+        }
+
+        function stopAutoplay() {
+            if (slideshowInterval) {
+                clearInterval(slideshowInterval);
+            }
+        }
+
+        function resetAutoplay() {
+            if (isAutoplayActive) {
+                startAutoplay();
+            }
+        }
+
+        // --- 8. MAGIC CURSOR / TOUCH TRAIL EFFECT ---
+        document.addEventListener('mousemove', (e) => {
+            createTrailParticle(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            // Get coordinates of the touch point
+            createTrailParticle(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+
+        function createTrailParticle(x, y) {
+            // Throttling: Only spawn particles ~18% of the time to avoid DOM pollution and keep it smooth
+            if (Math.random() > 0.18) return;
+
+            const particle = document.createElement('span');
+            particle.className = 'trail-particle';
+            
+            const emojis = ['💖', '✨', '🌸', '✨', '💕', '🌹', '✨'];
+            particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Position centered on touch/mouse
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+
+            // Random size & rotation
+            const size = Math.random() * 12 + 10;
+            particle.style.fontSize = `${size}px`;
+
+            // Random flight direction
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 20 + Math.random() * 35;
+            const tx = Math.cos(angle) * speed;
+            const ty = Math.sin(angle) * speed - 15; // Drift upwards
+
+            particle.style.setProperty('--tx', `${tx}px`);
+            particle.style.setProperty('--ty', `${ty}px`);
+
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 1100);
+        }
+
+        // Start falling rose petals immediately on page load
+        initPetalEngine();
+
+    </script>
+</body>
+</html>

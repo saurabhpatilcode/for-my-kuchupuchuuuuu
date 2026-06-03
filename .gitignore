@@ -1,0 +1,17 @@
+# Ignore raw romantic photos
+images/*.jpeg
+images/*.jpg
+images/*.png
+
+# Ignore raw music files
+*.mp3
+*.wav
+Sham bhi koi  - Audio Lyrical  Aisha  Sonam Kapoor  Abhay Deol  Javed Akhtar  Amit Trivedi.mp3
+
+# Ignore temporary text files
+poem.html.txt
+for_my_cutu.html
+
+# DO NOT ignore the encrypted counterparts
+!images/*.enc
+!*.enc
