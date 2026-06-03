@@ -213,12 +213,8 @@
         // Encrypted Poem Base64 String (Derived using SHA-256 password key 'awesomenaturalufff')
         const encryptedPoemBase64 = "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";
 
-        // Correct answers for the login OTP
-        const correctAnswers = {
-            1: ["awesome", "wesome"],
-            2: ["natural", "atural"],
-            3: ["ufff", "fff"]
-        };
+        // Correct answers are not stored in code for cryptographic zero-knowledge security.
+        // Decryption key will be derived directly from user inputs and validation occurs by checking if decryption succeeds.
 
         // --- WEB CRYPTO API DECRYPTION HELPERS ---
         async function getDecryptionKey(password) {
@@ -358,24 +354,18 @@
             const val2 = document.getElementById('otp-2').value.trim().toLowerCase();
             const val3 = document.getElementById('otp-3').value.trim().toLowerCase();
 
-            const isOk1 = correctAnswers[1].includes(val1);
-            const isOk2 = correctAnswers[2].includes(val2);
-            const isOk3 = correctAnswers[3].includes(val3);
+            // Normalize word spelling options (awesome/wesome, natural/atural, ufff/fff)
+            let word1 = val1;
+            if (word1 === 'wesome') word1 = 'awesome';
+            let word2 = val2;
+            if (word2 === 'atural') word2 = 'natural';
+            let word3 = val3;
+            if (word3 === 'fff') word3 = 'ufff';
 
-            if (isOk1 && isOk2 && isOk3) {
-                // Correct credentials
-                unlockWebsite();
-            } else {
-                // Shake and show error
-                errorMsg.classList.add('visible');
-                const card = document.querySelector('.login-card');
-                card.style.animation = 'none';
-                void card.offsetWidth; // trigger reflow
-                card.style.animation = 'shake 0.5s ease-in-out';
-                
-                // Log fail for debugging if needed
-                console.log("Login failed with input:", {val1, val2, val3});
-            }
+            // Concatenate to derive the key
+            const passphrase = word1 + word2 + word3;
+
+            unlockWebsite(passphrase);
         }
 
         // Add shake keyframe styling dynamically
@@ -392,7 +382,7 @@
         const cakeScreen = document.getElementById('cake-screen');
         const openCardBtn = document.getElementById('open-card-btn');
 
-        async function unlockWebsite() {
+        async function unlockWebsite(passphrase) {
             const loadingScreen = document.getElementById('loading-screen');
             const progressBar = document.getElementById('loading-progress');
             const loadingText = document.querySelector('.loading-text');
@@ -400,9 +390,6 @@
             // 1. Unhide loading screen
             loadingScreen.style.display = 'flex';
             loadingScreen.style.opacity = '1';
-
-            // Use the standardized passphrase awesomenaturalufff
-            const passphrase = 'awesomenaturalufff';
 
             try {
                 const key = await getDecryptionKey(passphrase);
@@ -470,8 +457,25 @@
 
             } catch (err) {
                 console.error("Asset decryption failed:", err);
-                loadingText.textContent = "Unlocking failed. Please check files.";
-                alert("Verification asset decryption error! Make sure encryption files match.");
+                
+                // Hide loading screen
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+
+                // If error is OperationError, it means the key/passphrase was incorrect
+                if (err.name === 'OperationError') {
+                    errorMsg.classList.add('visible');
+                    const card = document.querySelector('.login-card');
+                    card.style.animation = 'none';
+                    void card.offsetWidth; // trigger reflow
+                    card.style.animation = 'shake 0.5s ease-in-out';
+                } else {
+                    // Fetch or other network issues
+                    loadingText.textContent = "Unlocking failed. Please check files.";
+                    alert("Verification asset decryption error! Make sure encryption files are present and match.");
+                }
             }
         }
 

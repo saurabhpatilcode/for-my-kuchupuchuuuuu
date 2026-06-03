@@ -15,3 +15,6 @@ for_my_cutu.html
 # DO NOT ignore the encrypted counterparts
 !images/*.enc
 !*.enc
+
+# Ignore encryption helper tools
+encryptor.html
